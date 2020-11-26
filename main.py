@@ -1,6 +1,8 @@
 import sys
 from Greedy import Greedy
 from BruteForce import BruteForce
+from Dynamic import Dynamic
+
 
 if __name__ == '__main__':
 
@@ -32,3 +34,8 @@ if __name__ == '__main__':
         print(" BRUTE PASS :)")
     else:
         print("BRUTE FAIL :( ")
+
+    if s_mask == Dynamic(W, P, M, 1):
+        print(" DYNAMIC PASS :)")
+    else:
+        print("DYNAMIC FAIL :( ")
