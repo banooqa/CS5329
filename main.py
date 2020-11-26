@@ -26,16 +26,16 @@ if __name__ == '__main__':
         s_mask += (2 ** idx) * S[idx]
 
     if s_mask == Greedy(W, P, M, debug):
-        print(" GREEDY PASS :)")
+        print("GREEDY PASS :)")
     else:
         print("GREEDY FAIL :( ")
 
-    if s_mask == BruteForce(W, P, M, debug):
-        print(" BRUTE PASS :)")
-    else:
-        print("BRUTE FAIL :( ")
-
     if s_mask == Dynamic(W, P, M, 1):
-        print(" DYNAMIC PASS :)")
+        print("DYNAMIC PASS :)")
     else:
         print("DYNAMIC FAIL :( ")
+
+    if s_mask == BruteForce(W, P, M, debug):
+        print("BRUTE PASS :)")
+    else:
+        print("BRUTE FAIL :( ")
