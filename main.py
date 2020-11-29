@@ -18,7 +18,7 @@ def list_compare(alist, blist):
     print("There were " + str(matches) + "matches and " + str(mismatches) + " mismatches.")
     return mismatches
 
-def random_test(n_mult, m_mult, debug):
+def random_test(n_mult, m_mult, debug, timing):
     n = (n_mult * 10) + random.randint(-5, 5)
     M = (m_mult * 10) + random.randint(-5, 5)
     W = []
@@ -28,15 +28,18 @@ def random_test(n_mult, m_mult, debug):
     for i in range(n):
         W.append(math.ceil(random.random() * 5 * M / n))
         P.append(random.randint(1, 100))
-    dyn = Dynamic(W, P, M, debug)
-    bru = BruteForce(W, P, M, debug)
-    if list_equal(dyn, bru):
-        print("Random Test Pass")
+    dyn = Dynamic(W, P, M, debug, timing)
+    if n_mult <= 10 and m_mult <= 10:
+        bru = BruteForce(W, P, M, debug, timing)
+        if list_equal(dyn, bru):
+            print("Random Test Pass :) :) :) :) :) :) :) :)")
+        else:
+            print("Random Test Fail :____________________(")
     else:
-        print("Random Test Fail")
+        print("Skipping Brute tests as the problem set is big")
 
 
-def directed_tests(problem, debug):
+def directed_test(problem, debug, timing):
     path = "inputs/"
     fw = open(path + problem + "_w.txt", 'r')
     fp = open(path + problem + "_p.txt", 'r')
@@ -56,43 +59,41 @@ def directed_tests(problem, debug):
         if S[i]:
             sol.append(i)
 
-    start = time.perf_counter()
-    greedy = Greedy(W, P, M, debug)
+    greedy = Greedy(W, P, M, debug, timing)
     if list_compare(greedy, sol) == 0:
-        print("GREEDY PASS :)")
+        print("GREEDY PASS :) :) :) :) :) :) :) :)")
     else:
-        print("GREEDY FAIL :( ")
-    greedy_time = time.perf_counter() - start
+        print("GREEDY FAIL :____________________( ")
 
-    start = time.perf_counter()
-    dynamic = Dynamic(W, P, M, debug)
+    dynamic = Dynamic(W, P, M, debug, timing)
     if list_equal(dynamic, sol):
-        print("DYNAMIC PASS :)")
+        print("DYNAMIC PASS :) :) :) :) :) :) :) :)")
     else:
-        print("DYNAMIC FAIL :( ")
-    dynamic_time = time.perf_counter() - start
+        print("DYNAMIC FAIL :____________________( ")
 
-    start = time.perf_counter()
-    brute = BruteForce(W, P, M, debug)
+    brute = BruteForce(W, P, M, debug, timing)
     if list_equal(brute, sol):
-        print("BRUTE PASS :)")
+        print("BRUTE PASS :) :) :) :) :) :) :) :)")
     else:
-        print("BRUTE FAIL :( ")
-    brute_time = time.perf_counter() - start
+        print("BRUTE FAIL :____________________( ")
 
-    print(f"Brute took {brute_time:0.4f}s, Greedy took {greedy_time:0.4f}s, and Dynamic took {dynamic_time:0.4f}s")
-    print(f"total speedup: {brute_time / dynamic_time:0.4f}")
-
-def random_tests(debug):
-    n_list = [1, 2, 3]
-    m_list = [2, 4]
+def random_tests(debug, timing):
+    n_list = [1, 2, 90]
+    m_list = [2, 10, 100]
     for n in n_list:
         for m in m_list:
-            random_test(n, m, debug)
+            print("\nRunning random test with approx " + str(n*10) + " elements and a max weight of approx " + str(m*10))
+            random_test(n, m, debug, timing)
+
+def directed_tests(debug, timing):
+    for i in range(1, 8):
+        print("\nRunning test p0" + str(i))
+        directed_test("p0" + str(i), debug, timing)
 
 if __name__ == '__main__':
     debug = 0
-    # directed_tests('p01', debug)
-    random_tests(debug)
+    timing = 1
+    directed_tests(debug, timing)
+    random_tests(debug, timing)
 
 

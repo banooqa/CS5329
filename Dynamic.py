@@ -1,3 +1,4 @@
+import time
 class KnapsackDynamic:
 
     # constructor
@@ -59,7 +60,10 @@ class KnapsackDynamic:
         return opt_weight
 
 
-def Dynamic(W, P, M, debug):
+def Dynamic(W, P, M, debug, timing):
+    if timing:
+        start = time.perf_counter()
+
     if debug:
         print("Weights: " + str(W))
         print("Profits: " + str(P))
@@ -72,6 +76,10 @@ def Dynamic(W, P, M, debug):
     if debug:
         print("Optimal subset has a weight of " + str(optimal_weight) + ", and a profit of " + str(optimal_profit))
         print("The index of the elements of optimal Subset are: " + str(soln))
+
+    if timing:
+        end = time.perf_counter()
+        print(f"Dynamic took {(end - start):0.4f}s to complete")
 
     return soln
 

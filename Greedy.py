@@ -1,4 +1,9 @@
-def Greedy(W, P, M, debug):
+import time
+
+def Greedy(W, P, M, debug, timing):
+
+    if timing:
+        start = time.perf_counter()
 
     if debug:
         print("Weights: " + str(W))
@@ -25,5 +30,9 @@ def Greedy(W, P, M, debug):
     if debug:
         print("Solution subset has a weight of " + str(total_weight) + ", and a profit of " + str(total_profit))
         print("The index of the elements of Solution Subset are: " + str(solution))
+
+    if timing:
+        end = time.perf_counter()
+        print(f"Greedy took {(end - start):0.4f}s to complete")
 
     return solution

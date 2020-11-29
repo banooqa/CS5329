@@ -1,4 +1,10 @@
-def BruteForce(W, P, M, debug):
+import time
+
+def BruteForce(W, P, M, debug, timing):
+
+    if timing:
+        start = time.perf_counter()
+
     num_elements = len(W)
     assert (num_elements == len(P))
     feasible_subsets = 0
@@ -41,4 +47,7 @@ def BruteForce(W, P, M, debug):
         print("Optimal subset has a weight of " + str(optimal_weight) + ", and a profit of " + str(optimal_profit))
         print("The index of the elements of optimal Subset are: " + str(solution))
 
+    if timing:
+        end = time.perf_counter()
+        print(f"Brute took {(end - start):0.4f}s to complete")
     return solution
